@@ -209,7 +209,7 @@ int InpdListMake(int bBuild)
 	if (bBuild)	{
 		SendMessage(hInpdList, LVM_DELETEALLITEMS, 0, 0);
 	}
-
+	
 	// Add all the input names to the list
 	for (unsigned int i = 0; i < nGameInpCount; i++) {
 		struct BurnInputInfo bii;
@@ -228,7 +228,7 @@ int InpdListMake(int bBuild)
 		}
 
 		memset(&LvItem, 0, sizeof(LvItem));
-		LvItem.mask = LVIF_TEXT | LVIF_PARAM;
+		LvItem.mask = LVIF_TEXT |  LVIF_PARAM;
 		LvItem.iItem = j;
 		LvItem.iSubItem = 0;
 		LvItem.pszText = ANSIToTCHAR(bii.szName, NULL, 0);
@@ -595,6 +595,58 @@ static int InitAnalogOptions(int nGi, int nPci)
 	return 0;
 }
 
+INT32 HardwarePresetWrite(FILE* h)
+{
+	// Write input types
+	for (UINT32 i = 0; i < nGameInpCount; i++) {
+		TCHAR* szName = NULL;
+		INT32 nPad = 0;
+		szName = InputNumToName(i);
+		_ftprintf(h, _T("input  \"%s\" "), szName);
+		nPad = 16 - _tcslen(szName);
+		for (INT32 j = 0; j < nPad; j++) {
+			_ftprintf(h, _T(" "));
+		}
+		_ftprintf(h, _T("%s\n"), InpToString(GameInp + i));
+	}
+
+	_ftprintf(h, _T("\n"));
+
+	struct GameInp* pgi = GameInp + nGameInpCount;
+	for (UINT32 i = nGameInpCount; i < nGameInpCount + nMacroCount; i++, pgi++) {
+		INT32 nPad = 0;
+
+		if (pgi->nInput & GIT_GROUP_MACRO) {
+			switch (pgi->nInput) {
+			case GIT_MACRO_AUTO:									// Auto-assigned macros
+				if (ListView_GetCheckState(hInpdList, i) &&
+					_stricmp("System Pause", pgi->Macro.szName) != 0 &&
+					_stricmp("System FFWD", pgi->Macro.szName) != 0 &&
+					_stricmp("System Load State", pgi->Macro.szName) != 0 &&
+					_stricmp("System Save State", pgi->Macro.szName) != 0 &&
+					_stricmp("System UNDO State", pgi->Macro.szName) != 0
+					)
+					_ftprintf(h, _T("afire  \"%hs\"\n"), pgi->Macro.szName);  // Create autofire (afire) tag
+				_ftprintf(h, _T("macro  \"%hs\" "), pgi->Macro.szName);
+				break;
+			case GIT_MACRO_CUSTOM:									// Custom macros
+				_ftprintf(h, _T("custom \"%hs\" "), pgi->Macro.szName);
+				break;
+			default:												// Unknown -- ignore
+				continue;
+			}
+
+			nPad = 16 - strlen(pgi->Macro.szName);
+			for (INT32 j = 0; j < nPad; j++) {
+				_ftprintf(h, _T(" "));
+			}
+			_ftprintf(h, _T("%s\n"), InpMacroToString(pgi));
+		}
+	}
+
+	return 0;
+}
+
 static void SaveHardwarePreset()
 {
 	TCHAR *szFileName = _T("config\\presets\\preset.ini");
@@ -619,7 +671,7 @@ static void SaveHardwarePreset()
 		_ftprintf(fp, _T(APP_TITLE) _T(" - Hardware Default Preset\n\n"));
 		_ftprintf(fp, _T("%s\n\n"), szHardwareString);
 		_ftprintf(fp, _T("version 0x%06X\n\n"), nBurnVer);
-		GameInpWrite(fp);
+		HardwarePresetWrite(fp);
 		fclose(fp);
 	}
 
@@ -812,8 +864,19 @@ static INT_PTR CALLBACK DialogProc(HWND hDlg, UINT Msg, WPARAM wParam, LPARAM lP
 			int nCount = SendMessage(hInpdList, LVM_GETITEMCOUNT, 0, 0);
 
 			if (nCount > 0)
-				for (int i = 0; i < nCount; i++, pgi++)
-					pgi->Macro.nSysMacro = ListView_GetCheckState(hInpdList, i) ? 15 : 0;  // Setting Auto-Fire
+				for (int i = 0; i < nCount; i++, pgi++) {
+					// Setting Auto-Fire
+					pgi->Macro.nSysMacro = ListView_GetCheckState(hInpdList, i) ? 15 : 0;
+					// Exclude system macros
+					if ((_stricmp("System Pause", pgi->Macro.szName) == 0 ||
+						_stricmp("System FFWD", pgi->Macro.szName) == 0 ||
+						_stricmp("System Load State", pgi->Macro.szName) == 0 ||
+						_stricmp("System Save State", pgi->Macro.szName) == 0 ||
+						_stricmp("System UNDO State", pgi->Macro.szName) == 0) &&
+						pgi->Macro.nSysMacro > 1)
+						pgi->Macro.nSysMacro = 1;
+				}
+
 
 			SendMessage(hDlg, WM_CLOSE, 0, 0);
 			return 0;
@@ -958,9 +1021,6 @@ static INT_PTR CALLBACK DialogProc(HWND hDlg, UINT Msg, WPARAM wParam, LPARAM lP
 		int Id = LOWORD(wParam);
 		NMHDR* pnm = (NMHDR*)lParam;
 
-		LPNMLISTVIEW pnmlv = (LPNMLISTVIEW)lParam;
-		int nCheckbox = pnmlv->iItem;  // Returns the line number of the mouse click
-
 		struct GameInp* pgi = NULL;
 		struct BurnInputInfo bii;
 
@@ -973,21 +1033,35 @@ static INT_PTR CALLBACK DialogProc(HWND hDlg, UINT Msg, WPARAM wParam, LPARAM lP
 				ListItemDelete();
 			}
 		}
-		if (Id == IDC_INPD_LIST && pnm->code == LVN_ITEMCHANGED && ListView_GetCheckState(hInpdList, nCheckbox)) {  // Only check the trigger status of the checkbox.
-			pgi = GameInp + nCheckbox;
+		if (Id == IDC_INPD_LIST && pnm->code == LVN_ITEMCHANGED) {
+			/* Clear the checkboxs before the non Marco buttons 
+			   After that, you should not access these checkboxes that have been eliminated
+			   Otherwise, the program will throw an exception due to incorrect access */
+			NMLISTVIEW* pNMListView = (NMLISTVIEW*)pnm;
+			pgi = GameInp + pNMListView->iItem;
+
+			LVITEM LvItem;
+			memset(&LvItem, 0, sizeof(LvItem));
+
 			memset(&bii, 0, sizeof(bii));
-			BurnDrvGetInputInfo(&bii, nCheckbox); 
+			BurnDrvGetInputInfo(&bii, pNMListView->iItem);
 
-			INT32 nResult = (pgi->Input.pVal ? 0 : 1) + ((pgi->Macro.nSysMacro == 1 || bii.szName) ? 2 : 0);  // Is input specified + Is it a target macro
-			LPCWSTR psResult = (nResult > 1) ? L"This is a general input, not a macro." : L"You must first specify an input for the macro.";
+			if (pgi->Macro.nSysMacro == 1 || bii.szName) {
+				LvItem.iItem = pNMListView->iItem;
+				LvItem.mask = LVIF_STATE;
+				LvItem.stateMask = LVIS_STATEIMAGEMASK;
+				LvItem.state = 0;
 
-			// Only macrcos with assigned input keys are allowed.
-			if (nResult > 0) {
-				MessageBox(hInpdDlg, psResult, NULL, MB_ICONWARNING);
-				ListView_SetCheckState(hInpdList, nCheckbox, 0);
+				SendMessage(hInpdList, LVM_SETITEM, 0, (LPARAM)&LvItem);
 			}
+			// Avoid accessing checkboxes that have been eliminated
+			if (! pgi->Input.pVal && pgi->Macro.nSysMacro !=1 && pgi->Macro.szName)
+				// Check that the checkbox is properly checked
+				if (ListView_GetCheckState(hInpdList, pNMListView->iItem)){
+					ListView_SetCheckState(hInpdList, pNMListView->iItem, 0);
+					MessageBox(hInpdDlg, FBALoadStringEx(hAppInst, IDS_ERR_MARCO_NOT_MAPPING, true), NULL, MB_ICONWARNING);
+				}
 		}
-
 		if (Id == IDC_INPD_LIST && pnm->code == NM_CUSTOMDRAW) {
 			NMLVCUSTOMDRAW* plvcd = (NMLVCUSTOMDRAW*)lParam;
 

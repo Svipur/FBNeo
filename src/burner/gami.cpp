@@ -26,7 +26,9 @@ UINT8 macroSystemLoadState = 0;
 UINT8 macroSystemUNDOState = 0;
 
 #define HW_NEOGEO ( ((BurnDrvGetHardwareCode() & HARDWARE_PUBLIC_MASK) == HARDWARE_SNK_NEOGEO) || ((BurnDrvGetHardwareCode() & HARDWARE_PUBLIC_MASK) == HARDWARE_SNK_NEOCD) )
-#define HW_MISC ( (! HW_NEOGEO) && ((BurnDrvGetHardwareCode() & HARDWARE_PUBLIC_MASK) != HARDWARE_SEGA_MEGADRIVE) )
+#define HW_NES ( ((BurnDrvGetHardwareCode() & HARDWARE_PUBLIC_MASK) == HARDWARE_NES) || ((BurnDrvGetHardwareCode() & HARDWARE_PUBLIC_MASK) == HARDWARE_FDS) )
+#define HW_MISC ( (! HW_NEOGEO) && (! HW_NES) && ((BurnDrvGetHardwareCode() & HARDWARE_PUBLIC_MASK) != HARDWARE_SEGA_MEGADRIVE) )
+#define SETS_VS ( (BurnDrvGetGenreFlags() & GBF_VSFIGHT) && ((BurnDrvGetFamilyFlags() & FBF_SF) || (BurnDrvGetFamilyFlags() & FBF_DSTLK) || (BurnDrvGetFamilyFlags() &FBF_PWRINST) || HW_NEOGEO) )
 
 // ---------------------------------------------------------------------------
 
@@ -324,32 +326,94 @@ static void GameInpInitMacros()
 			pgi++;
 	}
 
-	// Some games may require these buttons to have autofire as well
-	for (UINT32 i = 0; i < nGameInpCount; i++) {
-		bii.szName = NULL;
-		BurnDrvGetInputInfo(&bii, i);
-
-		if (bii.szName == NULL) {
-			bii.szName = "";
-		}
-		if (_stricmp(" Up", bii.szName + 2) == 0 || _stricmp(" Down", bii.szName + 2) == 0 || _stricmp(" Left", bii.szName + 2) == 0 || _stricmp(" Right", bii.szName + 2) == 0) {
-			sprintf(pgi->Macro.szName, "%s", bii.szName);
-
-			pgi->nInput = GIT_MACRO_AUTO;
-			pgi->nType = BIT_DIGITAL;
-			pgi->Macro.nMode = 0;
-			pgi->Macro.pVal[0] = bii.pVal;
-			pgi->Macro.nVal[0] = 1;
-
-			nMacroCount++;
-			pgi++;
-		}
-	}
-	
 	// Remove two keys for volume adjustment of cps2
 	INT32 nRealButtons = ((BurnDrvGetHardwareCode() & HARDWARE_PUBLIC_MASK) == HARDWARE_CAPCOM_CPS2) ? nFireButtons - 2 : nFireButtons;
+	INT32 nIndex = 0;
 
-	for (INT32 nPlayer = 0; nPlayer < nMaxPlayers; nPlayer++) {
+	for (UINT32 nPlayer = 0; nPlayer < nMaxPlayers; nPlayer++) {
+		UINT8* pArrow[4] = { 0, 0, 0, 0 };  // { up, down, left, right }
+
+		// Some games may require these buttons to have autofire as well
+		for (INT32 i = nIndex; i < nGameInpCount; i++, nIndex++)
+		{
+			bii.szName = NULL;
+			BurnDrvGetInputInfo(&bii, i);
+
+			if (bii.szName == NULL) {
+				bii.szName = "";
+			}
+			if (_stricmp(" Up", bii.szName + 2) == 0 ||
+				_stricmp(" Down", bii.szName + 2) == 0 ||
+				_stricmp(" Left", bii.szName + 2) == 0 ||
+				_stricmp(" Right", bii.szName + 2) == 0)
+			{
+				sprintf(pgi->Macro.szName, "%s", bii.szName);
+
+				pgi->nInput = GIT_MACRO_AUTO;
+				pgi->nType = BIT_DIGITAL;
+				pgi->Macro.nMode = 0;
+				pgi->Macro.pVal[0] = bii.pVal;
+				pgi->Macro.nVal[0] = 1;
+
+				nMacroCount++;
+				pgi++;
+
+				if (_stricmp(" Up", bii.szName + 2) == 0) pArrow[0] = bii.pVal;
+				if (_stricmp(" Down", bii.szName + 2) == 0) pArrow[1] = bii.pVal;
+				if (_stricmp(" Left", bii.szName + 2) == 0) pArrow[2] = bii.pVal;
+				if (_stricmp(" Right", bii.szName + 2) == 0) pArrow[3] = bii.pVal;
+
+				if ((SETS_VS) && pArrow[0] && pArrow[1] && pArrow[2] && pArrow[3]) {
+					sprintf(pgi->Macro.szName, "P%d %s", nPlayer + 1, "¨I");
+					pgi->nInput = GIT_MACRO_AUTO;
+					pgi->nType = BIT_DIGITAL;
+					pgi->Macro.nMode = 0;
+					pgi->Macro.pVal[0] = pArrow[0];
+					pgi->Macro.nVal[0] = 1;
+					pgi->Macro.pVal[1] = pArrow[2];
+					pgi->Macro.nVal[1] = 1;
+					nMacroCount++;
+					pgi++;
+
+					sprintf(pgi->Macro.szName, "P%d %s", nPlayer + 1, "¨J");
+					pgi->nInput = GIT_MACRO_AUTO;
+					pgi->nType = BIT_DIGITAL;
+					pgi->Macro.nMode = 0;
+					pgi->Macro.pVal[0] = pArrow[0];
+					pgi->Macro.nVal[0] = 1;
+					pgi->Macro.pVal[1] = pArrow[3];
+					pgi->Macro.nVal[1] = 1;
+					nMacroCount++;
+					pgi++;
+
+					sprintf(pgi->Macro.szName, "P%d %s", nPlayer + 1, "¨L");
+					pgi->nInput = GIT_MACRO_AUTO;
+					pgi->nType = BIT_DIGITAL;
+					pgi->Macro.nMode = 0;
+					pgi->Macro.pVal[0] = pArrow[1];
+					pgi->Macro.nVal[0] = 1;
+					pgi->Macro.pVal[1] = pArrow[2];
+					pgi->Macro.nVal[1] = 1;
+					nMacroCount++;
+					pgi++;
+
+					sprintf(pgi->Macro.szName, "P%d %s", nPlayer + 1, "¨K");
+					pgi->nInput = GIT_MACRO_AUTO;
+					pgi->nType = BIT_DIGITAL;
+					pgi->Macro.nMode = 0;
+					pgi->Macro.pVal[0] = pArrow[1];
+					pgi->Macro.nVal[0] = 1;
+					pgi->Macro.pVal[1] = pArrow[3];
+					pgi->Macro.nVal[1] = 1;
+					nMacroCount++;
+					pgi++;
+				}
+				if (_stricmp(" Right", bii.szName + 2) == 0) {  // The last key value is ...
+					nIndex++;
+					break;
+				}
+			}
+		}
 		for (INT32 i = 0; i < nRealButtons; i++) {
 			BurnDrvGetInputInfo(&bii, (HW_NEOGEO) ? nNeogeoButtons[nPlayer][i] : nPgmButtons[nPlayer][i]);
 
@@ -366,8 +430,6 @@ static void GameInpInitMacros()
 				pgi++;
 			}
 		}
-	}
-	for (INT32 nPlayer = 0; nPlayer < nMaxPlayers; nPlayer++) {
 		if (nPunchx3[nPlayer] == 7) {		// Create a 3x punch macro
 			pgi->nInput = GIT_MACRO_AUTO;
 			pgi->nType = BIT_DIGITAL;
@@ -451,7 +513,7 @@ static void GameInpInitMacros()
 			pgi->nType = BIT_DIGITAL;
 			pgi->Macro.nMode = 0;
 
-			sprintf(pgi->Macro.szName, "P%i Buttons SP+WK", nPlayer + 1);
+			sprintf(pgi->Macro.szName, "P%i Buttons SP + WK", nPlayer + 1);
 			BurnDrvGetInputInfo(&bii, nPunchInputs[nPlayer][2]);
 			pgi->Macro.pVal[0] = bii.pVal;
 			pgi->Macro.nVal[0] = 1;
@@ -848,11 +910,12 @@ static void GameInpInitMacros()
 				pgi++;
 			}
 		}
-		if (nRealButtons == 2 && HW_MISC) {
+		if (nRealButtons == 2 && (HW_MISC || HW_NES)) {
+			const char* pChar = HW_NES ? "BA" : "12";
 			pgi->nInput = GIT_MACRO_AUTO;
 			pgi->nType = BIT_DIGITAL;
 			pgi->Macro.nMode = 0;
-			sprintf(pgi->Macro.szName, "P%i Buttons 12", nPlayer + 1);
+			sprintf(pgi->Macro.szName, "P%i Buttons %s", nPlayer + 1, pChar);
 			BurnDrvGetInputInfo(&bii, nPgmButtons[nPlayer][0]);
 			pgi->Macro.pVal[0] = bii.pVal;
 			pgi->Macro.nVal[0] = 1;
@@ -1144,7 +1207,7 @@ static INT32 StringToInp(struct GameInp* pgi, TCHAR* s)
 // ---------------------------------------------------------------------------
 // Convert an input to a string for config files
 
-static TCHAR* InpToString(struct GameInp* pgi)
+TCHAR* InpToString(struct GameInp* pgi)
 {
 	static TCHAR szString[80];
 
@@ -1187,7 +1250,7 @@ static TCHAR* InpToString(struct GameInp* pgi)
 	return _T("unknown");
 }
 
-static TCHAR* InpMacroToString(struct GameInp* pgi)
+TCHAR* InpMacroToString(struct GameInp* pgi)
 {
 	static TCHAR szString[256];
 
@@ -1555,7 +1618,7 @@ static UINT32 InputNameToNum(TCHAR* szName)
 	return ~0U;
 }
 
-static TCHAR* InputNumToName(UINT32 i)
+TCHAR* InputNumToName(UINT32 i)
 {
 	struct BurnInputInfo bii;
 	bii.szName = NULL;
@@ -1807,6 +1870,22 @@ INT32 GameInputAutoIni(INT32 nPlayer, TCHAR* lpszFile, bool bOverWrite)
 					i += nGameInpCount;
 					if (GameInp[i].Macro.nMode == 0 || bOverWrite) {	// Undefined - assign mapping
 						StringToMacro(GameInp + i, szEnd);
+					}
+				}
+			}
+
+			szValue = LabelCheck(szLine, _T("afire"));  // Hardware Default Preset - load autofire
+			if (szValue) {
+				TCHAR* szQuote = NULL;
+				TCHAR* szEnd = NULL;
+
+				if (QuoteRead(&szQuote, &szEnd, szValue)) continue;
+
+				i = MacroNameToNum(szQuote);
+				if (i != ~0U) {
+					i += nGameInpCount;
+					if (GameInp[i].Macro.nMode == 0 || bOverWrite) {
+						(GameInp + i)->Macro.nSysMacro = 15;
 					}
 				}
 			}
