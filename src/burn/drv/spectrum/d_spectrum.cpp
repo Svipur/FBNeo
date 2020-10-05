@@ -11589,21 +11589,40 @@ struct BurnDriver BurnSpectyazzie = {
 // ----------------------------
 // ----------------------------
 
-// Gun1
+// ssha1
 
-static struct BurnRomInfo Specgunsm1RomDesc[] = {
-	{ "gunsm1.tap", 149093, 0xff12d868, BRF_ESS | BRF_PRG },
+static struct BurnRomInfo Specssha1RomDesc[] = {
+	{ "ssha1.tap", 138544, 0x6a3d58a8, BRF_ESS | BRF_PRG },
 };
 
-STDROMPICKEXT(Specgunsm1, Specgunsm1, Spec128)
-STD_ROM_FN(Specgunsm1)
+STDROMPICKEXT(Specssha1, Specssha1, Spec128)
+STD_ROM_FN(Specssha1)
 
-struct BurnDriver BurnSpecgunsm1 = {
-	"spec_gunsm1", NULL, "spec_spec128", NULL, "1991",
-	"Gun1\0", NULL, "U.S. Gold", "ZX Spectrum",
+struct BurnDriver BurnSpecssha1 = {
+	"spec_ssha1", NULL, "spec_spec128", NULL, "1990",
+	"ssha1\0", NULL, "U.S. Gold", "ZX Spectrum",
 	NULL, NULL, NULL, NULL,
 	BDF_GAME_WORKING, 1, HARDWARE_SPECTRUM, GBF_MISC, 0,
-	SpectrumGetZipName, Specgunsm1RomInfo, Specgunsm1RomName, NULL, NULL, NULL, NULL, SpecInputInfo, SpecDIPInfo,
+	SpectrumGetZipName, Specssha1RomInfo, Specssha1RomName, NULL, NULL, NULL, NULL, SpecInputInfo, SpecDIPInfo,
+	TAP128KInit, SpecExit, SpecFrame, SpecDraw, SpecScan,
+	&SpecRecalc, 0x10, 288, 224, 4, 3
+};
+
+// ssha2
+
+static struct BurnRomInfo Specssha2RomDesc[] = {
+	{ "ssha2.tap", 139233, 0x4deba250, BRF_ESS | BRF_PRG },
+};
+
+STDROMPICKEXT(Specssha2, Specssha2, Spec128)
+STD_ROM_FN(Specssha2)
+
+struct BurnDriver BurnSpecssha2 = {
+	"spec_ssha2", NULL, "spec_spec128", NULL, "1990",
+	"ssha2\0", NULL, "U.S. Gold", "ZX Spectrum",
+	NULL, NULL, NULL, NULL,
+	BDF_GAME_WORKING, 1, HARDWARE_SPECTRUM, GBF_MISC, 0,
+	SpectrumGetZipName, Specssha2RomInfo, Specssha2RomName, NULL, NULL, NULL, NULL, SpecInputInfo, SpecDIPInfo,
 	TAP128KInit, SpecExit, SpecFrame, SpecDraw, SpecScan,
 	&SpecRecalc, 0x10, 288, 224, 4, 3
 };
