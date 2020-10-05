@@ -11573,7 +11573,7 @@ static struct BurnRomInfo SpecyazzieRomDesc[] = {
 STDROMPICKEXT(Specyazzie, Specyazzie, Spec128)
 STD_ROM_FN(Specyazzie)
 
-struct BurnDriver BurnSpectourmaline = {
+struct BurnDriver BurnSpectyazzie = {
 	"spec_yazzie", NULL, "spec_spec128", NULL, "2019",
 	"Yazzie (HB)\0", NULL, "RetroSouls", "ZX Spectrum",
 	NULL, NULL, NULL, NULL,
@@ -11589,7 +11589,7 @@ struct BurnDriver BurnSpectourmaline = {
 // ----------------------------
 // ----------------------------
 
-// GunSmoke Test
+// Gun1
 
 static struct BurnRomInfo Specgunsm1RomDesc[] = {
 	{ "gunsm1.tap", 149093, 0xff12d868, BRF_ESS | BRF_PRG },
@@ -11598,11 +11598,11 @@ static struct BurnRomInfo Specgunsm1RomDesc[] = {
 STDROMPICKEXT(Specgunsm1, Specgunsm1, Spec128)
 STD_ROM_FN(Specgunsm1)
 
-struct BurnDriver BurnSpectourmaline = {
-	"spec_gunsm1", NULL, "spec_spec128", NULL, "2019",
-	"GunSmoke Test\0", NULL, "RetroSouls", "ZX Spectrum",
+struct BurnDriver BurnSpecgunsm1 = {
+	"spec_gunsm1", NULL, "spec_spec128", NULL, "1991",
+	"Gun1\0", NULL, "U.S. Gold", "ZX Spectrum",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_NOT_WORKING | BDF_HOMEBREW, 1, HARDWARE_SPECTRUM, GBF_PUZZLE, 0,
+	BDF_GAME_WORKING, 1, HARDWARE_SPECTRUM, GBF_MISC, 0,
 	SpectrumGetZipName, Specgunsm1RomInfo, Specgunsm1RomName, NULL, NULL, NULL, NULL, SpecInputInfo, SpecDIPInfo,
 	TAP128KInit, SpecExit, SpecFrame, SpecDraw, SpecScan,
 	&SpecRecalc, 0x10, 288, 224, 4, 3
