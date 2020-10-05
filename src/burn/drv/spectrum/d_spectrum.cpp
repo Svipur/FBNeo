@@ -11589,67 +11589,10 @@ struct BurnDriver BurnSpectourmaline = {
 // ----------------------------
 // ----------------------------
 
-// Vindicators (same TAP, 48k)
-
-static struct BurnRomInfo Specvindy1RomDesc[] = {
-	{ "Vindicators (1989)(Domark).tap", 0x0ffc4, 0xc4b6502e, BRF_ESS | BRF_PRG },
-};
-
-STDROMPICKEXT(Specvindy1, Specvindy1, Spectrum)
-STD_ROM_FN(Specvindy1)
-
-struct BurnDriver BurnSpecvindy1 = {
-	"spec_vindy1", NULL, "spec_spectrum", NULL, "1989",
-	"Vindicators (same TAP, 48k)\0", NULL, "Domark", "ZX Spectrum",
-	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING, 1, HARDWARE_SPECTRUM, GBF_MISC, 0,
-	SpectrumGetZipName, Specvindy1RomInfo, Specvindy1RomName, NULL, NULL, NULL, NULL, SpecInputInfo, SpecDIPInfo,
-	TAPInit, SpecExit, SpecFrame, SpecDraw, SpecScan,
-	&SpecRecalc, 0x10, 288, 224, 4, 3
-};
-
-// Vindicators Erbe
-
-static struct BurnRomInfo Specvindy2RomDesc[] = {
-	{ "VindErbe.tap", 0x0fe74, 0xed6ea4aa, BRF_ESS | BRF_PRG },
-};
-
-STDROMPICKEXT(Specvindy2, Specvindy2, Spec128)
-STD_ROM_FN(Specvindy2)
-
-struct BurnDriver BurnSpecvindy2 = {
-	"spec_vindy2", NULL, "spec_spec128", NULL, "1989",
-	"Vindicators Erbe\0", NULL, "Domark", "ZX Spectrum",
-	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING, 1, HARDWARE_SPECTRUM, GBF_MISC, 0,
-	SpectrumGetZipName, Specvindy2RomInfo, Specvindy2RomName, NULL, NULL, NULL, NULL, SpecInputInfo, SpecDIPInfo,
-	TAP128KInit, SpecExit, SpecFrame, SpecDraw, SpecScan,
-	&SpecRecalc, 0x10, 288, 224, 4, 3
-};
-
-// Vindicators CZ
-
-static struct BurnRomInfo Specvindy3RomDesc[] = {
-	{ "VindCZ.tap", 0x0fe74, 0xc301e47d, BRF_ESS | BRF_PRG },
-};
-
-STDROMPICKEXT(Specvindy3, Specvindy3, Spec128)
-STD_ROM_FN(Specvindy3)
-
-struct BurnDriver BurnSpecvindy3 = {
-	"spec_vindy3", NULL, "spec_spec128", NULL, "1989",
-	"Vindicators CZ\0", NULL, "Domark", "ZX Spectrum",
-	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING, 1, HARDWARE_SPECTRUM, GBF_MISC, 0,
-	SpectrumGetZipName, Specvindy3RomInfo, Specvindy3RomName, NULL, NULL, NULL, NULL, SpecInputInfo, SpecDIPInfo,
-	TAP128KInit, SpecExit, SpecFrame, SpecDraw, SpecScan,
-	&SpecRecalc, 0x10, 288, 224, 4, 3
-};
-
-// Sidewize 48k Test
+// Sidewize 48k in-level
 
 static struct BurnRomInfo SpecsidewizetestRomDesc[] = {
-	{ "swize48.z80", 0x0ab79, 0x4c07dc81, BRF_ESS | BRF_PRG },
+	{ "swize48.z80", 0x09e0f, 0x1264aa82, BRF_ESS | BRF_PRG },
 };
 
 STDROMPICKEXT(Specsidewizetest, Specsidewizetest, Spectrum)
@@ -11657,10 +11600,105 @@ STD_ROM_FN(Specsidewizetest)
 
 struct BurnDriver BurnSpecsidewizetest = {
 	"spec_sidewizetest", NULL, "spec_spectrum", NULL, "1984",
-	"Sidewize 48k Test\0", NULL, "Quicksilva", "ZX Spectrum",
+	"Sidewize 48k in-level\0", NULL, "Quicksilva", "ZX Spectrum",
 	NULL, NULL, NULL, NULL,
 	BDF_GAME_WORKING, 1, HARDWARE_SPECTRUM, GBF_MISC, 0,
 	SpectrumGetZipName, SpecsidewizetestRomInfo, SpecsidewizetestRomName, NULL, NULL, NULL, NULL, SpecInputInfo, SpecDIPInfo,
 	Z80SnapshotInit, SpecExit, SpecFrame, SpecDraw, SpecScan,
+	&SpecRecalc, 0x10, 288, 224, 4, 3
+};
+
+// Sidewize Planet Emu 1
+
+static struct BurnRomInfo Specswplemu1RomDesc[] = {
+	{ "swplemu1.z80", 0x0a57f, 0x21fba6ed, BRF_ESS | BRF_PRG },
+};
+
+STDROMPICKEXT(Specswplemu1, Specswplemu1, Spectrum)
+STD_ROM_FN(Specswplemu1)
+
+struct BurnDriver BurnSpecswplemu1 = {
+	"spec_swplemu1", NULL, "spec_spectrum", NULL, "1984",
+	"Sidewize Planet Emu 1\0", NULL, "Quicksilva", "ZX Spectrum",
+	NULL, NULL, NULL, NULL,
+	BDF_GAME_WORKING, 1, HARDWARE_SPECTRUM, GBF_MISC, 0,
+	SpectrumGetZipName, Specswplemu1RomInfo, Specswplemu1RomName, NULL, NULL, NULL, NULL, SpecInputInfo, SpecDIPInfo,
+	Z80SnapshotInit, SpecExit, SpecFrame, SpecDraw, SpecScan,
+	&SpecRecalc, 0x10, 288, 224, 4, 3
+};
+
+// Sidewize Planet Emu 2
+
+static struct BurnRomInfo Specswplemu2RomDesc[] = {
+	{ "swplemu2.z80", 0x09fb3, 0x0bfa1ecf, BRF_ESS | BRF_PRG },
+};
+
+STDROMPICKEXT(Specswplemu2, Specswplemu2, Spectrum)
+STD_ROM_FN(Specswplemu2)
+
+struct BurnDriver BurnSpecswplemu2 = {
+	"spec_swplemu2", NULL, "spec_spectrum", NULL, "1984",
+	"Sidewize Planet Emu 2\0", NULL, "Quicksilva", "ZX Spectrum",
+	NULL, NULL, NULL, NULL,
+	BDF_GAME_WORKING, 1, HARDWARE_SPECTRUM, GBF_MISC, 0,
+	SpectrumGetZipName, Specswplemu2RomInfo, Specswplemu2RomName, NULL, NULL, NULL, NULL, SpecInputInfo, SpecDIPInfo,
+	Z80SnapshotInit, SpecExit, SpecFrame, SpecDraw, SpecScan,
+	&SpecRecalc, 0x10, 288, 224, 4, 3
+};
+
+// GunSmoke emu-land 1
+
+static struct BurnRomInfo Specgunsmoke1RomDesc[] = {
+	{ "g1.tap", 0x2d552, 0xff1320e1, BRF_ESS | BRF_PRG },
+};
+
+STDROMPICKEXT(Specgunsmoke1, Specgunsmoke1, Spec128)
+STD_ROM_FN(Specgunsmoke1)
+
+struct BurnDriver BurnSpecgunsmoke1 = {
+	"spec_gunsmoke1", NULL, "spec_spec128", NULL, "1985",
+	"GunSmoke emu-land 1\0", NULL, "Odin Computer Graphics", "ZX Spectrum",
+	NULL, NULL, NULL, NULL,
+	BDF_GAME_WORKING, 1, HARDWARE_SPECTRUM, GBF_MISC, 0,
+	SpectrumGetZipName, Specgunsmoke1RomInfo, Specgunsmoke1RomName, NULL, NULL, NULL, NULL, SpecInputInfo, SpecDIPInfo,
+	TAP128KInit, SpecExit, SpecFrame, SpecDraw, SpecScan,
+	&SpecRecalc, 0x10, 288, 224, 4, 3
+};
+
+// GunSmoke emu-land 2
+
+static struct BurnRomInfo Specgunsmoke2RomDesc[] = {
+	{ "g2.tap", 0x2a388, 0xef9217de, BRF_ESS | BRF_PRG },
+};
+
+STDROMPICKEXT(Specgunsmoke2, Specgunsmoke2, Spec128)
+STD_ROM_FN(Specgunsmoke2)
+
+struct BurnDriver BurnSpecgunsmoke2 = {
+	"spec_gunsmoke2", NULL, "spec_spec128", NULL, "1985",
+	"GunSmoke emu-land 2\0", NULL, "Odin Computer Graphics", "ZX Spectrum",
+	NULL, NULL, NULL, NULL,
+	BDF_GAME_WORKING, 1, HARDWARE_SPECTRUM, GBF_MISC, 0,
+	SpectrumGetZipName, Specgunsmoke2RomInfo, Specgunsmoke2RomName, NULL, NULL, NULL, NULL, SpecInputInfo, SpecDIPInfo,
+	TAP128KInit, SpecExit, SpecFrame, SpecDraw, SpecScan,
+	&SpecRecalc, 0x10, 288, 224, 4, 3
+};
+
+// GunSmoke emu-land 3
+
+static struct BurnRomInfo Specgunsmoke3RomDesc[] = {
+	{ "g3.tap", 0x2aac3, 0x1891d693, BRF_ESS | BRF_PRG },
+};
+
+STDROMPICKEXT(Specgunsmoke3, Specgunsmoke3, Spec128)
+STD_ROM_FN(Specgunsmoke3)
+
+struct BurnDriver BurnSpecgunsmoke3 = {
+	"spec_gunsmoke3", NULL, "spec_spec128", NULL, "1985",
+	"GunSmoke emu-land 3\0", NULL, "Odin Computer Graphics", "ZX Spectrum",
+	NULL, NULL, NULL, NULL,
+	BDF_GAME_WORKING, 1, HARDWARE_SPECTRUM, GBF_MISC, 0,
+	SpectrumGetZipName, Specgunsmoke3RomInfo, Specgunsmoke3RomName, NULL, NULL, NULL, NULL, SpecInputInfo, SpecDIPInfo,
+	TAP128KInit, SpecExit, SpecFrame, SpecDraw, SpecScan,
 	&SpecRecalc, 0x10, 288, 224, 4, 3
 };
