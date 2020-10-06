@@ -11592,7 +11592,7 @@ struct BurnDriver BurnSpectyazzie = {
 // Hostages
 
 static struct BurnRomInfo SpechostagesRomDesc[] = {
-	{ "Hostages (1990)(Infogrames).tap.tap", 89743, 0x66890d7e, BRF_ESS | BRF_PRG },
+	{ "Hostages (1990)(Infogrames).tap", 222554, 0x171b72b5, BRF_ESS | BRF_PRG },
 };
 
 STDROMPICKEXT(Spechostages, Spechostages, Spec128)
@@ -11600,10 +11600,48 @@ STD_ROM_FN(Spechostages)
 
 struct BurnDriver BurnSpechostages = {
 	"spec_hostages", NULL, "spec_spec128", NULL, "1990",
-	"Hostages\0", NULL, "U.S. Gold", "ZX Spectrum",
+	"Hostages\0", NULL, "Infogrames", "ZX Spectrum",
 	NULL, NULL, NULL, NULL,
 	BDF_GAME_WORKING, 1, HARDWARE_SPECTRUM, GBF_MISC, 0,
 	SpectrumGetZipName, SpechostagesRomInfo, SpechostagesRomName, NULL, NULL, NULL, NULL, SpecInputInfo, SpecDIPInfo,
+	TAP128KInit, SpecExit, SpecFrame, SpecDraw, SpecScan,
+	&SpecRecalc, 0x10, 288, 224, 4, 3
+};
+
+// Action Force II
+
+static struct BurnRomInfo Specactionforce2RomDesc[] = {
+	{ "Action Force II (1988)(Virgin Games).tap", 46813, 0x3d4139b7, BRF_ESS | BRF_PRG },
+};
+
+STDROMPICKEXT(Specactionforce2, Specactionforce2, Spec128)
+STD_ROM_FN(Specactionforce2)
+
+struct BurnDriver BurnSpecactionforce2 = {
+	"spec_actionforce2", NULL, "spec_spec128", NULL, "1988",
+	"Action Force II\0", NULL, "Virgin Games", "ZX Spectrum",
+	NULL, NULL, NULL, NULL,
+	BDF_GAME_WORKING, 1, HARDWARE_SPECTRUM, GBF_MISC, 0,
+	SpectrumGetZipName, Specactionforce2RomInfo, Specactionforce2RomName, NULL, NULL, NULL, NULL, SpecInputInfo, SpecDIPInfo,
+	TAP128KInit, SpecExit, SpecFrame, SpecDraw, SpecScan,
+	&SpecRecalc, 0x10, 288, 224, 4, 3
+};
+
+// Action Reflex
+
+static struct BurnRomInfo SpecactionreflexRomDesc[] = {
+	{ "Action Reflex (1986)(Mirrorsoft).tap", 41597, 0xaada6209, BRF_ESS | BRF_PRG },
+};
+
+STDROMPICKEXT(Specactionreflex, Specactionreflex, Spec128)
+STD_ROM_FN(Specactionreflex)
+
+struct BurnDriver BurnSpecactionreflex = {
+	"spec_actionreflex", NULL, "spec_spec128", NULL, "1986",
+	"Action Reflex\0", NULL, "Mirrorsoft", "ZX Spectrum",
+	NULL, NULL, NULL, NULL,
+	BDF_GAME_WORKING, 1, HARDWARE_SPECTRUM, GBF_MISC, 0,
+	SpectrumGetZipName, SpecactionreflexRomInfo, SpecactionreflexRomName, NULL, NULL, NULL, NULL, SpecInputInfo, SpecDIPInfo,
 	TAP128KInit, SpecExit, SpecFrame, SpecDraw, SpecScan,
 	&SpecRecalc, 0x10, 288, 224, 4, 3
 };
