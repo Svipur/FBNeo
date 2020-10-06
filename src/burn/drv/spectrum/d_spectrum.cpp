@@ -11589,21 +11589,59 @@ struct BurnDriver BurnSpectyazzie = {
 // ----------------------------
 // ----------------------------
 
-// ssha3
+// rescg1
 
-static struct BurnRomInfo Specssha3RomDesc[] = {
-	{ "ssha3.tap", 139224, 0xd4787623, BRF_ESS | BRF_PRG },
+static struct BurnRomInfo Specrescg1RomDesc[] = {
+	{ "rescg1.tap", 89743, 0x66890d7e, BRF_ESS | BRF_PRG },
 };
 
-STDROMPICKEXT(Specssha3, Specssha3, Spec128)
-STD_ROM_FN(Specssha3)
+STDROMPICKEXT(Specrescg1, Specrescg1, Spec128)
+STD_ROM_FN(Specrescg1)
 
-struct BurnDriver BurnSpecssha3 = {
-	"spec_ssha3", NULL, "spec_spec128", NULL, "1990",
-	"ssha3\0", NULL, "U.S. Gold", "ZX Spectrum",
+struct BurnDriver BurnSpecrescg1 = {
+	"spec_rescg1", NULL, "spec_spec128", NULL, "1990",
+	"rescg1\0", NULL, "U.S. Gold", "ZX Spectrum",
 	NULL, NULL, NULL, NULL,
 	BDF_GAME_WORKING, 1, HARDWARE_SPECTRUM, GBF_MISC, 0,
-	SpectrumGetZipName, Specssha3RomInfo, Specssha3RomName, NULL, NULL, NULL, NULL, SpecInputInfo, SpecDIPInfo,
+	SpectrumGetZipName, Specrescg1RomInfo, Specrescg1RomName, NULL, NULL, NULL, NULL, SpecInputInfo, SpecDIPInfo,
+	TAP128KInit, SpecExit, SpecFrame, SpecDraw, SpecScan,
+	&SpecRecalc, 0x10, 288, 224, 4, 3
+};
+
+// rescg2
+
+static struct BurnRomInfo Specrescg2RomDesc[] = {
+	{ "rescg2.tap", 96659, 0x1de00748, BRF_ESS | BRF_PRG },
+};
+
+STDROMPICKEXT(Specrescg2, Specrescg2, Spec128)
+STD_ROM_FN(Specrescg2)
+
+struct BurnDriver BurnSpecrescg2 = {
+	"spec_rescg2", NULL, "spec_spec128", NULL, "1990",
+	"rescg2\0", NULL, "U.S. Gold", "ZX Spectrum",
+	NULL, NULL, NULL, NULL,
+	BDF_GAME_WORKING, 1, HARDWARE_SPECTRUM, GBF_MISC, 0,
+	SpectrumGetZipName, Specrescg2RomInfo, Specrescg2RomName, NULL, NULL, NULL, NULL, SpecInputInfo, SpecDIPInfo,
+	TAP128KInit, SpecExit, SpecFrame, SpecDraw, SpecScan,
+	&SpecRecalc, 0x10, 288, 224, 4, 3
+};
+
+// rescg3
+
+static struct BurnRomInfo Specrescg3RomDesc[] = {
+	{ "rescg3.tap", 88380, 0x16da1bb4, BRF_ESS | BRF_PRG },
+};
+
+STDROMPICKEXT(Specrescg3, Specrescg3, Spec128)
+STD_ROM_FN(Specrescg3)
+
+struct BurnDriver BurnSpecrescg3 = {
+	"spec_rescg3", NULL, "spec_spec128", NULL, "1990",
+	"rescg3\0", NULL, "U.S. Gold", "ZX Spectrum",
+	NULL, NULL, NULL, NULL,
+	BDF_GAME_WORKING, 1, HARDWARE_SPECTRUM, GBF_MISC, 0,
+	SpectrumGetZipName, Specrescg3RomInfo, Specrescg3RomName, NULL, NULL, NULL, NULL, SpecInputInfo, SpecDIPInfo,
 	TAP128KInit, SpecExit, SpecFrame, SpecDraw, SpecScan,
 	&SpecRecalc, 0x10, 288, 224, 4, 3
 };
