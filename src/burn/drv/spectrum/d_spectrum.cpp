@@ -11837,3 +11837,22 @@ struct BurnDriver BurnSpecyazzie = {
 	TAP128KInit, SpecExit, SpecFrame, SpecDraw, SpecScan,
 	&SpecRecalc, 0x10, 288, 224, 4, 3
 };
+
+// Hostages
+
+static struct BurnRomInfo SpechostagesRomDesc[] = {
+	{ "Hostages (1990)(Infogrames).tap", 222554, 0x171b72b5, BRF_ESS | BRF_PRG },
+};
+
+STDROMPICKEXT(Spechostages, Spechostages, Spec128)
+STD_ROM_FN(Spechostages)
+
+struct BurnDriver BurnSpechostages = {
+	"spec_hostages", NULL, "spec_spec128", NULL, "1986",
+	"Hostages\0", NULL, "Mirrorsoft", "ZX Spectrum",
+	NULL, NULL, NULL, NULL,
+	BDF_GAME_WORKING, 1, HARDWARE_SPECTRUM, GBF_MISC, 0,
+	SpectrumGetZipName, SpechostagesRomInfo, SpechostagesRomName, NULL, NULL, NULL, NULL, SpecInputInfo, SpecDIPInfo,
+	TAP128KInit, SpecExit, SpecFrame, SpecDraw, SpecScan,
+	&SpecRecalc, 0x10, 288, 224, 4, 3
+};
