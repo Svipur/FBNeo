@@ -11838,21 +11838,40 @@ struct BurnDriver BurnSpecyazzie = {
 	&SpecRecalc, 0x10, 288, 224, 4, 3
 };
 
-// Kraal
+// Indiana Jones and the Last Crusade
 
-static struct BurnRomInfo SpeckraalRomDesc[] = {
-	{ "Kraal (1990)(Hewson Consultants).tap", 57614, 0x84276314, BRF_ESS | BRF_PRG },
+static struct BurnRomInfo SpecindylastcrusadeRomDesc[] = {
+	{ "Indiana Jones and the Last Crusade (1989)(U.S. Gold).tap", 145470, 0xe43fcead, BRF_ESS | BRF_PRG },
 };
 
-STDROMPICKEXT(Speckraal, Speckraal, Spectrum)
-STD_ROM_FN(Speckraal)
+STDROMPICKEXT(Specindylastcrusade, Specindylastcrusade, Spec128)
+STD_ROM_FN(Specindylastcrusade)
 
-struct BurnDriver BurnSpeckraal = {
-	"spec_kraal", NULL, "spec_spectrum", NULL, "1990",
-	"Kraal\0", NULL, "Hewson Consultants", "ZX Spectrum",
+struct BurnDriver BurnSpecindylastcrusade = {
+	"spec_indylastcrusade", NULL, "spec_spec128", NULL, "1989",
+	"Indiana Jones and the Last Crusade\0", NULL, "U.S. Gold", "ZX Spectrum",
 	NULL, NULL, NULL, NULL,
 	BDF_GAME_WORKING, 1, HARDWARE_SPECTRUM, GBF_MISC, 0,
-	SpectrumGetZipName, SpeckraalRomInfo, SpeckraalRomName, NULL, NULL, NULL, NULL, SpecInputInfo, SpecDIPInfo,
-	TAPInit, SpecExit, SpecFrame, SpecDraw, SpecScan,
+	SpectrumGetZipName, SpecindylastcrusadeRomInfo, SpecindylastcrusadeRomName, NULL, NULL, NULL, NULL, SpecInputInfo, SpecDIPInfo,
+	TAP128KInit, SpecExit, SpecFrame, SpecDraw, SpecScan,
+	&SpecRecalc, 0x10, 288, 224, 4, 3
+};
+
+// Indiana Jones and the Temple of Doom
+
+static struct BurnRomInfo SpecindytempledoomRomDesc[] = {
+	{ "Indiana Jones and the Temple of Doom (1987)(U.S. Gold).tap", 76529, 0x2c9fa63e, BRF_ESS | BRF_PRG },
+};
+
+STDROMPICKEXT(Specindytempledoom, Specindytempledoom, Spec128)
+STD_ROM_FN(Specindytempledoom)
+
+struct BurnDriver BurnSpecindytempledoom = {
+	"spec_indytempledoom", NULL, "spec_spec128", NULL, "1987",
+	"Indiana Jones and the Temple of Doom\0", NULL, "U.S. Gold", "ZX Spectrum",
+	NULL, NULL, NULL, NULL,
+	BDF_GAME_WORKING, 1, HARDWARE_SPECTRUM, GBF_MISC, 0,
+	SpectrumGetZipName, SpecindytempledoomRomInfo, SpecindytempledoomRomName, NULL, NULL, NULL, NULL, SpecInputInfo, SpecDIPInfo,
+	TAP128KInit, SpecExit, SpecFrame, SpecDraw, SpecScan,
 	&SpecRecalc, 0x10, 288, 224, 4, 3
 };
