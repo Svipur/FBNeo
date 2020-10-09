@@ -11838,40 +11838,21 @@ struct BurnDriver BurnSpecyazzie = {
 	&SpecRecalc, 0x10, 288, 224, 4, 3
 };
 
-// Indiana Jones and the Last Crusade
+// IndyTest
 
-static struct BurnRomInfo SpecindylastcrusadeRomDesc[] = {
-	{ "Indiana Jones and the Last Crusade (1989)(U.S. Gold).tap", 145470, 0xe43fcead, BRF_ESS | BRF_PRG },
+static struct BurnRomInfo SpecindytestRomDesc[] = {
+	{ "IndyTest.tap", 366350, 0xb6341899, BRF_ESS | BRF_PRG },
 };
 
-STDROMPICKEXT(Specindylastcrusade, Specindylastcrusade, Spec128)
-STD_ROM_FN(Specindylastcrusade)
+STDROMPICKEXT(Specindytest, Specindytest, Spec128)
+STD_ROM_FN(Specindytest)
 
-struct BurnDriver BurnSpecindylastcrusade = {
-	"spec_indylastcrusade", NULL, "spec_spec128", NULL, "1989",
+struct BurnDriver BurnSpecindytest = {
+	"spec_indytest", NULL, "spec_spec128", NULL, "1989",
 	"Indiana Jones and the Last Crusade\0", NULL, "U.S. Gold", "ZX Spectrum",
 	NULL, NULL, NULL, NULL,
 	BDF_GAME_WORKING, 1, HARDWARE_SPECTRUM, GBF_MISC, 0,
-	SpectrumGetZipName, SpecindylastcrusadeRomInfo, SpecindylastcrusadeRomName, NULL, NULL, NULL, NULL, SpecInputInfo, SpecDIPInfo,
-	TAP128KInit, SpecExit, SpecFrame, SpecDraw, SpecScan,
-	&SpecRecalc, 0x10, 288, 224, 4, 3
-};
-
-// Indiana Jones and the Temple of Doom
-
-static struct BurnRomInfo SpecindytempledoomRomDesc[] = {
-	{ "Indiana Jones and the Temple of Doom (1987)(U.S. Gold).tap", 76529, 0x2c9fa63e, BRF_ESS | BRF_PRG },
-};
-
-STDROMPICKEXT(Specindytempledoom, Specindytempledoom, Spec128)
-STD_ROM_FN(Specindytempledoom)
-
-struct BurnDriver BurnSpecindytempledoom = {
-	"spec_indytempledoom", NULL, "spec_spec128", NULL, "1987",
-	"Indiana Jones and the Temple of Doom\0", NULL, "U.S. Gold", "ZX Spectrum",
-	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING, 1, HARDWARE_SPECTRUM, GBF_MISC, 0,
-	SpectrumGetZipName, SpecindytempledoomRomInfo, SpecindytempledoomRomName, NULL, NULL, NULL, NULL, SpecInputInfo, SpecDIPInfo,
+	SpectrumGetZipName, SpecindytestRomInfo, SpecindytestRomName, NULL, NULL, NULL, NULL, SpecInputInfo, SpecDIPInfo,
 	TAP128KInit, SpecExit, SpecFrame, SpecDraw, SpecScan,
 	&SpecRecalc, 0x10, 288, 224, 4, 3
 };
