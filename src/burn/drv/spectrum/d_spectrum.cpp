@@ -11837,22 +11837,3 @@ struct BurnDriver BurnSpecyazzie = {
 	TAP128KInit, SpecExit, SpecFrame, SpecDraw, SpecScan,
 	&SpecRecalc, 0x10, 288, 224, 4, 3
 };
-
-// IndyTest
-
-static struct BurnRomInfo SpecindytestRomDesc[] = {
-	{ "IndyTest.tap", 366350, 0xb6341899, BRF_ESS | BRF_PRG },
-};
-
-STDROMPICKEXT(Specindytest, Specindytest, Spec128)
-STD_ROM_FN(Specindytest)
-
-struct BurnDriver BurnSpecindytest = {
-	"spec_indytest", NULL, "spec_spec128", NULL, "1989",
-	"Indiana Jones and the Last Crusade\0", NULL, "U.S. Gold", "ZX Spectrum",
-	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING, 1, HARDWARE_SPECTRUM, GBF_MISC, 0,
-	SpectrumGetZipName, SpecindytestRomInfo, SpecindytestRomName, NULL, NULL, NULL, NULL, SpecInputInfo, SpecDIPInfo,
-	TAP128KInit, SpecExit, SpecFrame, SpecDraw, SpecScan,
-	&SpecRecalc, 0x10, 288, 224, 4, 3
-};
