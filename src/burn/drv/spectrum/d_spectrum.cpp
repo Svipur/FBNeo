@@ -13486,3 +13486,79 @@ struct BurnDriver BurnSpecRygar2020 = {
 	TAP128KInit, SpecExit, SpecFrame, SpecDraw, SpecScan,
 	&SpecRecalc, 0x10, 288, 224, 4, 3
 };
+
+// Silent Shadow
+
+static struct BurnRomInfo SpecsilentshadowRomDesc[] = {
+	{ "Silent Shadow (1988)(Topo Soft).tap", 146162, 0xa6fb7413, BRF_ESS | BRF_PRG },
+};
+
+STDROMPICKEXT(Specsilentshadow, Specsilentshadow, Spec128)
+STD_ROM_FN(Specsilentshadow)
+
+struct BurnDriver BurnSpecsilentshadow = {
+	"spec_silentshadow", NULL, "spec_spec128", NULL, "1988",
+	"Silent Shadow\0", NULL, "Topo Soft", "ZX Spectrum",
+	NULL, NULL, NULL, NULL,
+	BDF_GAME_WORKING, 1, HARDWARE_SPECTRUM, GBF_MISC, 0,
+	SpectrumGetZipName, SpecsilentshadowRomInfo, SpecsilentshadowRomName, NULL, NULL, NULL, NULL, SpecInputInfo, SpecDIPInfo,
+	TAP128KInit, SpecExit, SpecFrame, SpecDraw, SpecScan,
+	&SpecRecalc, 0x10, 288, 224, 4, 3
+};
+
+// Night Breed
+
+static struct BurnRomInfo SpecnbreedRomDesc[] = {
+	{ "Night Breed (1990)(Ocean).tap", 188653, 0x5701dcaf, BRF_ESS | BRF_PRG },
+};
+
+STDROMPICKEXT(Specnbreed, Specnbreed, Spec128)
+STD_ROM_FN(Specnbreed)
+
+struct BurnDriver BurnSpecnbreed = {
+	"spec_nbreed", NULL, "spec_spec128", NULL, "1990",
+	"Night Breed\0", NULL, "Ocean", "ZX Spectrum",
+	NULL, NULL, NULL, NULL,
+	BDF_GAME_WORKING, 1, HARDWARE_SPECTRUM, GBF_MISC, 0,
+	SpectrumGetZipName, SpecnbreedRomInfo, SpecnbreedRomName, NULL, NULL, NULL, NULL, SpecInputInfo, SpecDIPInfo,
+	TAP128KInit, SpecExit, SpecFrame, SpecDraw, SpecScan,
+	&SpecRecalc, 0x10, 288, 224, 4, 3
+};
+
+// Rescate en el Golfo (Part 1 of 2)
+
+static struct BurnRomInfo Specrescategolfo1RomDesc[] = {
+	{ "Rescate en el Golfo (1990)(Opera Soft)(Part 1 of 2).tap", 89743, 0x66890d7e, BRF_ESS | BRF_PRG },
+};
+
+STDROMPICKEXT(Specrescategolfo1, Specrescategolfo1, Spec128)
+STD_ROM_FN(Specrescategolfo1)
+
+struct BurnDriver BurnSpecrescategolfo1 = {
+	"spec_rescategolfo1", NULL, "spec_spec128", NULL, "1990",
+	"Rescate en el Golfo (Part 1 of 2)\0", NULL, "Opera Soft", "ZX Spectrum",
+	NULL, NULL, NULL, NULL,
+	BDF_GAME_WORKING, 1, HARDWARE_SPECTRUM, GBF_MISC, 0,
+	SpectrumGetZipName, Specrescategolfo1RomInfo, Specrescategolfo1RomName, NULL, NULL, NULL, NULL, SpecInputInfo, SpecDIPInfo,
+	TAP128KInit, SpecExit, SpecFrame, SpecDraw, SpecScan,
+	&SpecRecalc, 0x10, 288, 224, 4, 3
+};
+
+// Rescate en el Golfo (Part 2 of 2)
+
+static struct BurnRomInfo Specrescategolfo2RomDesc[] = {
+	{ "Rescate en el Golfo (1990)(Opera Soft)(Part 2 of 2).tap", 96659, 0x1de00748, BRF_ESS | BRF_PRG },
+};
+
+STDROMPICKEXT(Specrescategolfo2, Specrescategolfo2, Spec128)
+STD_ROM_FN(Specrescategolfo2)
+
+struct BurnDriver BurnSpecrescategolfo2 = {
+	"spec_rescategolfo2", NULL, "spec_spec128", NULL, "1990",
+	"Rescate en el Golfo (Part 2 of 2)\0", NULL, "Opera Soft", "ZX Spectrum",
+	NULL, NULL, NULL, NULL,
+	BDF_GAME_WORKING, 1, HARDWARE_SPECTRUM, GBF_MISC, 0,
+	SpectrumGetZipName, Specrescategolfo2RomInfo, Specrescategolfo2RomName, NULL, NULL, NULL, NULL, SpecInputInfo, SpecDIPInfo,
+	TAP128KInit, SpecExit, SpecFrame, SpecDraw, SpecScan,
+	&SpecRecalc, 0x10, 288, 224, 4, 3
+};
