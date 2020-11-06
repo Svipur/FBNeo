@@ -14281,7 +14281,7 @@ struct BurnDriver BurnSpecRodland = {
 // Shadow Of The Beast
 
 static struct BurnRomInfo SpecShadowofthebeastRomDesc[] = {
-	{ "Shadow Of The Beast (1990)(Gremlin Graphics).tap", 146341, 0x19aee076, BRF_ESS | BRF_PRG },
+	{ "Shadow Of The Beast (1990)(Gremlin Graphics).z80", 114104, 0x0507010d, BRF_ESS | BRF_PRG },
 };
 
 STDROMPICKEXT(SpecShadowofthebeast, SpecShadowofthebeast, Spec128)
