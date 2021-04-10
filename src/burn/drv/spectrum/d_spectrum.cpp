@@ -17346,7 +17346,7 @@ static struct BurnRomInfo SpecHammerfistRomDesc[] = {
 	{ "Hammerfist (1990)(Activision).tap", 188831, 0xc6ad835b, BRF_ESS | BRF_PRG },
 };
 
-STDROMPICKEXT(SpecHammerfist, SpecHammerfist, Spec128)
+STDROMPICKEXT(SpecHammerfist, SpecHammerfist, Spectrum)
 STD_ROM_FN(SpecHammerfist)
 
 struct BurnDriver BurnSpecHammerfist = {
@@ -17355,7 +17355,7 @@ struct BurnDriver BurnSpecHammerfist = {
 	NULL, NULL, NULL, NULL,
 	BDF_GAME_WORKING, 1, HARDWARE_SPECTRUM, GBF_MISC, 0,
 	SpectrumGetZipName, SpecHammerfistRomInfo, SpecHammerfistRomName, NULL, NULL, NULL, NULL, SpecInputInfo, SpecDIPInfo,
-	Spec128KInit, SpecExit, SpecFrame, SpecDraw, SpecScan,
+	SpecInit, SpecExit, SpecFrame, SpecDraw, SpecScan,
 	&SpecRecalc, 0x10, 288, 224, 4, 3
 };
 
@@ -17365,7 +17365,7 @@ static struct BurnRomInfo SpecIntkarate1RomDesc[] = {
 	{ "International Karate 48K - Side 1 (1985)(System 3).z80", 34724, 0x344134a1, BRF_ESS | BRF_PRG },
 };
 
-STDROMPICKEXT(SpecIntkarate1, SpecIntkarate1, Spec128)
+STDROMPICKEXT(SpecIntkarate1, SpecIntkarate1, Spectrum)
 STD_ROM_FN(SpecIntkarate1)
 
 struct BurnDriver BurnSpecIntkarate1 = {
@@ -17384,7 +17384,7 @@ static struct BurnRomInfo SpecIntkarate2RomDesc[] = {
 	{ "International Karate 48K - Side 2 (1985)(System 3).z80", 34746, 0x28eac074, BRF_ESS | BRF_PRG },
 };
 
-STDROMPICKEXT(SpecIntkarate2, SpecIntkarate2, Spec128)
+STDROMPICKEXT(SpecIntkarate2, SpecIntkarate2, Spectrum)
 STD_ROM_FN(SpecIntkarate2)
 
 struct BurnDriver BurnSpecIntkarate2 = {
