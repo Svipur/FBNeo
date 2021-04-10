@@ -17350,7 +17350,7 @@ STDROMPICKEXT(SpecHammerfist, SpecHammerfist, Spectrum)
 STD_ROM_FN(SpecHammerfist)
 
 struct BurnDriver BurnSpecHammerfist = {
-	"spec_hammerfist", NULL, "spec_spec128", NULL, "1990",
+	"spec_hammerfist", NULL, "spec_spectrum", NULL, "1990",
 	"Hammerfist\0", NULL, "Activision", "ZX Spectrum",
 	NULL, NULL, NULL, NULL,
 	BDF_GAME_WORKING, 1, HARDWARE_SPECTRUM, GBF_MISC, 0,
@@ -17369,7 +17369,7 @@ STDROMPICKEXT(SpecIntkarate1, SpecIntkarate1, Spectrum)
 STD_ROM_FN(SpecIntkarate1)
 
 struct BurnDriver BurnSpecIntkarate1 = {
-	"spec_intkarate1", NULL, "spec_spec128", NULL, "1985",
+	"spec_intkarate1", NULL, "spec_spectrum", NULL, "1985",
 	"International Karate 48K - Side 1\0", NULL, "System 3", "ZX Spectrum",
 	NULL, NULL, NULL, NULL,
 	BDF_GAME_WORKING, 1, HARDWARE_SPECTRUM, GBF_MISC, 0,
@@ -17388,7 +17388,7 @@ STDROMPICKEXT(SpecIntkarate2, SpecIntkarate2, Spectrum)
 STD_ROM_FN(SpecIntkarate2)
 
 struct BurnDriver BurnSpecIntkarate2 = {
-	"spec_intkarate2", NULL, "spec_spec128", NULL, "1985",
+	"spec_intkarate2", NULL, "spec_spectrum", NULL, "1985",
 	"International Karate 48K - Side 2\0", NULL, "System 3", "ZX Spectrum",
 	NULL, NULL, NULL, NULL,
 	BDF_GAME_WORKING, 1, HARDWARE_SPECTRUM, GBF_MISC, 0,
