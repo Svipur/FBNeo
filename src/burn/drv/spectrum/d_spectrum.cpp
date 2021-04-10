@@ -17340,40 +17340,59 @@ struct BurnDriver BurnSpecTrinidad = {
 	&SpecRecalc, 0x10, 288, 224, 4, 3
 };
 
-// Road Runner and Wile E. Coyote 128K
+// Hammerfist
 
-static struct BurnRomInfo SpecRoadwile128kRomDesc[] = {
-	{ "Road Runner and Wile E. Coyote 128K (1991)(Hi-Tec).tap", 50312, 0x766bd6a4, BRF_ESS | BRF_PRG },
+static struct BurnRomInfo SpecHammerfistRomDesc[] = {
+	{ "Hammerfist (1990)(Activision).tap", 188831, 0xc6ad835b, BRF_ESS | BRF_PRG },
 };
 
-STDROMPICKEXT(SpecRoadwile128k, SpecRoadwile128k, Spec128)
-STD_ROM_FN(SpecRoadwile128k)
+STDROMPICKEXT(SpecHammerfist, SpecHammerfist, Spec128)
+STD_ROM_FN(SpecHammerfist)
 
-struct BurnDriver BurnSpecRoadwile128k = {
-	"spec_roadwile128k", NULL, "spec_spec128", NULL, "1991",
-	"Road Runner and Wile E. Coyote 128K\0", NULL, "Hi-Tec", "ZX Spectrum",
+struct BurnDriver BurnSpecHammerfist = {
+	"spec_hammerfist", NULL, "spec_spec128", NULL, "1990",
+	"Hammerfist\0", NULL, "Activision", "ZX Spectrum",
 	NULL, NULL, NULL, NULL,
 	BDF_GAME_WORKING, 1, HARDWARE_SPECTRUM, GBF_MISC, 0,
-	SpectrumGetZipName, SpecRoadwile128kRomInfo, SpecRoadwile128kRomName, NULL, NULL, NULL, NULL, SpecInputInfo, SpecDIPInfo,
+	SpectrumGetZipName, SpecHammerfistRomInfo, SpecHammerfistRomName, NULL, NULL, NULL, NULL, SpecInputInfo, SpecDIPInfo,
 	Spec128KInit, SpecExit, SpecFrame, SpecDraw, SpecScan,
 	&SpecRecalc, 0x10, 288, 224, 4, 3
 };
 
-// Samurai Warrior - Usagi Yojimbo 128k
+// International Karate 48K - Side 1
 
-static struct BurnRomInfo SpecSamwarrior128kRomDesc[] = {
-	{ "Samurai Warrior - Usagi Yojimbo 128k (1988)(Firebird).tap", 53473, 0x989e9ffd, BRF_ESS | BRF_PRG },
+static struct BurnRomInfo SpecIntkarate1RomDesc[] = {
+	{ "International Karate 48K - Side 1 (1985)(System 3).z80", 34724, 0x344134a1, BRF_ESS | BRF_PRG },
 };
 
-STDROMPICKEXT(SpecSamwarrior128k, SpecSamwarrior128k, Spec128)
-STD_ROM_FN(SpecSamwarrior128k)
+STDROMPICKEXT(SpecIntkarate1, SpecIntkarate1, Spec128)
+STD_ROM_FN(SpecIntkarate1)
 
-struct BurnDriver BurnSpecSamwarrior128k = {
-	"spec_samwarrior128k", NULL, "spec_spec128", NULL, "1988",
-	"Samurai Warrior - Usagi Yojimbo 128k\0", NULL, "Firebird", "ZX Spectrum",
+struct BurnDriver BurnSpecIntkarate1 = {
+	"spec_intkarate1", NULL, "spec_spec128", NULL, "1985",
+	"International Karate 48K - Side 1\0", NULL, "System 3", "ZX Spectrum",
 	NULL, NULL, NULL, NULL,
 	BDF_GAME_WORKING, 1, HARDWARE_SPECTRUM, GBF_MISC, 0,
-	SpectrumGetZipName, SpecSamwarrior128kRomInfo, SpecSamwarrior128kRomName, NULL, NULL, NULL, NULL, SpecInputInfo, SpecDIPInfo,
-	Spec128KInit, SpecExit, SpecFrame, SpecDraw, SpecScan,
+	SpectrumGetZipName, SpecIntkarate1RomInfo, SpecIntkarate1RomName, NULL, NULL, NULL, NULL, SpecInputInfo, SpecDIPInfo,
+	SpecInit, SpecExit, SpecFrame, SpecDraw, SpecScan,
+	&SpecRecalc, 0x10, 288, 224, 4, 3
+};
+
+// International Karate 48K - Side 2
+
+static struct BurnRomInfo SpecIntkarate2RomDesc[] = {
+	{ "International Karate 48K - Side 2 (1985)(System 3).z80", 34746, 0x28eac074, BRF_ESS | BRF_PRG },
+};
+
+STDROMPICKEXT(SpecIntkarate2, SpecIntkarate2, Spec128)
+STD_ROM_FN(SpecIntkarate2)
+
+struct BurnDriver BurnSpecIntkarate2 = {
+	"spec_intkarate2", NULL, "spec_spec128", NULL, "1985",
+	"International Karate 48K - Side 2\0", NULL, "System 3", "ZX Spectrum",
+	NULL, NULL, NULL, NULL,
+	BDF_GAME_WORKING, 1, HARDWARE_SPECTRUM, GBF_MISC, 0,
+	SpectrumGetZipName, SpecIntkarate2RomInfo, SpecIntkarate2RomName, NULL, NULL, NULL, NULL, SpecInputInfo, SpecDIPInfo,
+	SpecInit, SpecExit, SpecFrame, SpecDraw, SpecScan,
 	&SpecRecalc, 0x10, 288, 224, 4, 3
 };
